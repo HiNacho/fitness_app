@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  fitness-app:
+    build: .
+    container_name: fitness-calorie-predictor
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./expanded_fitness_data.csv:/app/expanded_fitness_data.csv:ro
+      - ./app.py:/app/app.py:ro
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_RUNONCONFIGCHANGE=true
+    restart: unless-stopped
